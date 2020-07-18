@@ -1,17 +1,37 @@
 #!/bin/bash
 declare -A coin
 singlet=(H T)
+doublet=(HH TT HT TH)
 for key in ${singlet[@]}
 do
         coin[$key]=0
 done
+for key in ${doublet[@]}
+do
+        coin[$key]=0
+done
+echo ${!coin[@]}
 
-for((i=0;i<10;i++))
+for((i=0;i<100;i++))
 do
         x=$((RANDOM%2))
         coin[${singlet[$x]}]=$((${coin[${singlet[$x]}]}+1))
 done
 
-#since i am running the loop for 10 times so percentage is calculated by val*10
-echo "Percentage of Heads" $((${coin[H]}*10))
-echo "Percentage of Tails" $((${coin[T]}*10))
+for((i=0;i<100;i++))
+do
+        x=$((RANDOM%4))
+        coin[${doublet[$x]}]=$((${coin[${doublet[$x]}]}+1))
+done
+
+#since i am running the loop for 100 times so percentage is calculated by value itself
+echo "SINGLET"
+echo "Percentage of H" ${coin[H]}
+echo "Percentage of T" ${coin[T]}
+
+echo "DOUBLET"
+echo "Percentage of HH" ${coin[HH]}
+echo "Percentage of TT" ${coin[TT]}
+echo "Percentage of HT" ${coin[HT]}
+echo "Percentage of TH" ${coin[TH]}
+
