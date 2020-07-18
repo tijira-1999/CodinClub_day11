@@ -55,3 +55,13 @@ echo "Percentage of THH" ${coin[THH]}
 echo "Percentage of THT" ${coin[THT]}
 echo "Percentage of HTH" ${coin[HTH]}
 
+max=H
+for key in ${!coin[@]}
+do
+	if [ ${coin[$key]} -gt ${coin[$max]} ]
+	then
+		max=$key
+	fi
+done
+
+echo "the winning combination is $max :" ${coin[$max]} "percentage"
